@@ -1,0 +1,18 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "node": true,
+        "es2021": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "extends": [
+      "prettier",
+      "plugin:react-hooks/recommended"
+    ]
+}

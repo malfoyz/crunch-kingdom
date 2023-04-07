@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         #*UserAdmin.add_fieldsets,
         (None, {
-            'fields' : ('username', 'email', 'first_name', 'last_name', 'phone', 'photo', 'password',)
+            'fields' : ('username', 'email', 'first_name', 'last_name', 'phone', 'photo', 'password1', 'password2',)
         }),
     )
 

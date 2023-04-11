@@ -6,16 +6,6 @@ from django.utils.translation import gettext_lazy as _
 class CustomUser(AbstractUser):
     """Модель пользователя с доп. данными"""
 
-    # login = models.CharField(
-    #     max_length=30,
-    #     unique=True,
-    #     verbose_name=_('Логин'),
-    # )
-    # name = models.CharField(
-    #     max_length=50,
-    #     verbose_name=_('Имя')
-    # )
-
     username = models.CharField(
         max_length=50,
         unique=True,

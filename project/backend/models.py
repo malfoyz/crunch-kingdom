@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator, MaxValueValidator
+from decimal import Decimal
 
 from users.models import CustomUser
 
@@ -25,12 +26,15 @@ class Product(models.Model):
     discount = models.PositiveSmallIntegerField(
         blank=True,
         verbose_name=_('Скидка'),
+        validators=(
+            MaxValueValidator(100),
+        ),
     )
-    quantity = models.IntegerField(
+    quantity = models.PositiveIntegerField(
         blank=True,
         verbose_name=_('Количество'),
     )
-    weight = models.IntegerField(
+    weight = models.PositiveIntegerField(
         blank=True,
         verbose_name=_('Вес'),
     )
@@ -38,6 +42,9 @@ class Product(models.Model):
         max_digits=10,
         decimal_places=2,
         verbose_name=_('Цена'),
+        validators=(
+            MinValueValidator(Decimal('0.00')),
+        ),
     )
     date_manufacture = models.DateField(
         blank=True,
@@ -140,13 +147,16 @@ class Shop(models.Model):
 class Deal(models.Model):
     """Модель сделки"""
 
-    quantity = models.IntegerField(
+    quantity = models.PositiveIntegerField(
         verbose_name=_('Количество'),
     )
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        verbose_name=_('Цена/ед.')
+        verbose_name=_('Цена/ед.'),
+        validators=(
+            MinValueValidator(Decimal('0.00')),
+        ),
     )
     datetime = models.DateTimeField(
         auto_now_add=True,
@@ -172,7 +182,7 @@ class Deal(models.Model):
         verbose_name_plural = _('Сделки')
 
     def __str__(self) -> str:
-        return self.pk
+        return str(self.pk)
 
 
 class Review(models.Model):
@@ -180,6 +190,9 @@ class Review(models.Model):
 
     mark = models.PositiveSmallIntegerField(
         verbose_name=_('Оценка'),
+        validators=(
+            MaxValueValidator(5),
+        ),
     )
     text = models.CharField(
         max_length=800,
@@ -217,8 +230,8 @@ class ShopReview(Review):
         verbose_name = _('Отзыв о магазине')
         verbose_name_plural = _('Отзывы о магазине')
 
-    def __str__(self) -> int:
-        return self.mark
+    def __str__(self) -> str:
+        return str(self.mark)
 
 
 class ProductReview(Review):
@@ -244,8 +257,8 @@ class ProductReview(Review):
         verbose_name = _('Отзыв о продукте')
         verbose_name_plural = _('Отзывы о продукте')
 
-    def __str__(self) -> int:
-        return self.mark
+    def __str__(self) -> str:
+        return str(self.mark)
 
 
 class Photobase(models.Model):
@@ -313,8 +326,8 @@ class ReviewPhotobase(Photobase):
         verbose_name = 'Блок фотографий отзыва'
         verbose_name_plural = 'Блоки фотографий отзывов'
 
-    def __str__(self) -> int:
-        return self.pk
+    def __str__(self) -> str:
+        return str(self.pk)
 
 
 class ProductPhotobase(Photobase):
@@ -325,5 +338,5 @@ class ProductPhotobase(Photobase):
         verbose_name = 'Блок фотографий продукта'
         verbose_name_plural = 'Блоки фотографий продуктов'
 
-    def __str__(self) -> int:
-        return self.pk
+    def __str__(self) -> str:
+        return str(self.pk)

@@ -1,10 +1,12 @@
+{% load static %}
+{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/catalog.scss' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
     <title>Каталог</title>
 </head>
@@ -38,43 +40,43 @@
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Конфеты</p>
-                    <img class="category__img" src="img/catalog/sweets.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/sweets.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Мармелад</p>
-                    <img class="category__img" src="img/catalog/marmelad.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/marmelad.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Пекарные изделия</p>
-                    <img class="category__img" src="img/catalog/bun.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/bun.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Сладости на заказ</p>
-                    <img class="category__img" src="img/catalog/baker.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/baker.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Кондитерские изделия</p>
-                    <img class="category__img" src="img/catalog/cake.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/cake.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Напитки</p>
-                    <img class="category__img" src="img/catalog/drinks.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/drinks.png' %}" alt="sweets">
                 </a>
             </li>
             <li class="categories__item category">
                 <a class="category__link">
                     <p class="category__name">Импортные продукты</p>
-                    <img class="category__img" src="img/catalog/import.png" alt="sweets">
+                    <img class="category__img" src="{% static 'backend/img/catalog/import.png' %}" alt="sweets">
                 </a>
             </li>
         </ul>

@@ -1,0 +1,45 @@
+$primary-color: #DBA921;
+$secondary-color: #8F8F8F;
+
+
+.category {
+
+}
+
+.category__top {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.category__back {
+    
+}
+
+.category__name {
+    font-size: 16px;
+    font-weight: 500;
+    color: $secondary-color;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.category__sort {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.sort__label {
+    font-size: 12px;
+    margin-right: 13px;
+    color: $secondary-color;
+}
+
+.category__products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-top: 20px;
+}

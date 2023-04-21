@@ -1,0 +1,145 @@
+.products__item {
+    width: 100px;
+
+    .item__img {
+        max-height: 100px;
+        max-width: 100px;
+    }
+    
+    .item__name {
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .item__shop-name {
+        font-size: 8px;
+        font-weight: 300;
+        color: $secondary-color;
+    }
+    
+    .item__purchase {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+    }
+    
+    .item__numerical {
+        display: flex;
+        align-items: flex-end;
+    }
+    
+    .item__price {
+        font-size: 12px;
+        font-weight: 400;
+    
+        &--orange {
+            color: $primary-color;
+        }
+    }
+    
+    .item__weight {
+        font-size: 10px;
+        font-weight: 400;
+        color: $secondary-color;
+    }
+    
+    .item__old-price {
+        font-size: 8px;
+        font-weight: 400;
+        color: $secondary-color;
+        align-self: center;
+        margin-left: 2px;
+    }
+    
+    .item__btn-to-cart {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.products__item--horizontal {
+    display: grid;
+    grid-template-columns: 24fr 76fr;
+    column-gap: 12px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 8px 12px;
+
+    .item__img {
+        max-height: 78px;
+        max-width: 78px;
+        align-self: center;
+    }
+
+    .item__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .item__name {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .item__shop-name {
+        font-size: 12px;
+        margin: 8px 0;
+    }
+
+    .item__quantity-change {
+       display: flex;
+       gap: 8px;
+    }
+
+    .item__quantity {
+        font-size: 14px;
+        font-weight: 600;
+        color: $secondary-color;
+    }
+
+    .item__price {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+}
+
+.products__item--large {
+    width: 100%;
+
+    .item__img {
+        max-height: 165px;
+        max-width: 165px;
+    }
+    
+    .item__name {
+        font-size: 16px;
+        margin-top: 12px;
+        margin-bottom: 0;
+    }
+    
+    .item__shop-name {
+        font-size: 12px;
+    }
+    
+    .item__purchase {
+        margin-top: 0;
+    }
+    
+    .item__price {
+        font-size: 16px;
+    }
+    
+    .item__weight {
+        font-size: 12px;
+    }
+    
+    .item__btn-to-cart {
+        
+    }
+}

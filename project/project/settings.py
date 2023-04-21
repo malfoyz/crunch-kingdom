@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'livereload',
     'django.contrib.admin',
     #'django.contrib.auth',
     'users.apps.UsersAuthConfig',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sass_processor',
 
     # my apps
     'backend.apps.BackendConfig',
@@ -60,14 +62,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'project.urls'
 
+TEMPLATE_DIR = BASE_DIR / 'templates'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +82,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
@@ -133,7 +142,18 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+if not DEBUG:
+    STATIC_ROOT = BASE_DIR / 'static'
+
+STATIC_DIR = BASE_DIR / 'static'
+STATICFILES_DIRS = [ 
+    STATIC_DIR,
+]
+
+SASS_PROCESSOR_ROOT = STATIC_DIR
+
+# Media 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

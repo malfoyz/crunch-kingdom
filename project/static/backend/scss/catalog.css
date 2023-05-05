@@ -466,6 +466,11 @@ input {
   padding-top: 20px;
   padding-bottom: 20px; }
 
+.header__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
+
 .content {
   position: relative;
   margin-top: 73px;
@@ -550,6 +555,24 @@ input {
   .products__item--horizontal .item__price {
     font-size: 14px;
     font-weight: 600; }
+
+.products__item--large {
+  width: 100%; }
+  .products__item--large .item__img {
+    max-height: 165px;
+    max-width: 165px; }
+  .products__item--large .item__name {
+    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 0; }
+  .products__item--large .item__shop-name {
+    font-size: 12px; }
+  .products__item--large .item__purchase {
+    margin-top: 0; }
+  .products__item--large .item__price {
+    font-size: 16px; }
+  .products__item--large .item__weight {
+    font-size: 12px; }
 
 .categories {
   display: grid;

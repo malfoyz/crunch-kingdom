@@ -133,4 +133,4 @@ dmypy.json
 *.sqlite3
 
 # Media files
-/media
+project/media/

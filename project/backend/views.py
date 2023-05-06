@@ -49,3 +49,9 @@ def profile(request: HttpRequest) -> HttpResponse:
         request=request,
         template_name='backend/profile.html',
     )
+
+def add_product_to_cart(request: HttpRequest, product_id) -> HttpResponse:
+    """Обработчик добавления товара в корзину"""
+
+    cart = request.session.get('cart', {})
+    if

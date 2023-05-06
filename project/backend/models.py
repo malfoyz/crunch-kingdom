@@ -87,6 +87,11 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def price_with_discount(self) -> float:
+        return self.price * (100 - self.discount) / 100
+
+    price_with_discount.short_description = 'Цена со скидкой'
+
 
 class Category(models.Model):
     """Модель категории"""

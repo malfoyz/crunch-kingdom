@@ -491,10 +491,15 @@ input {
   gap: 12px; }
 
 .products__item {
-  width: 100px; }
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
   .products__item .item__img {
-    max-height: 100px;
-    max-width: 100px; }
+    height: 100px;
+    width: 100px;
+    max-width: none;
+    border-radius: 10px; }
   .products__item .item__name {
     font-size: 12px;
     font-weight: 600;

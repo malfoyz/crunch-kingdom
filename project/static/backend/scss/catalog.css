@@ -564,8 +564,8 @@ input {
 .products__item--large {
   width: 100%; }
   .products__item--large .item__img {
-    max-height: 165px;
-    max-width: 165px; }
+    height: 165px;
+    width: 165px; }
   .products__item--large .item__name {
     font-size: 16px;
     margin-top: 12px;

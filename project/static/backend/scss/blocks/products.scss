@@ -1,9 +1,14 @@
 .products__item {
     width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .item__img {
-        max-height: 100px;
-        max-width: 100px;
+        height: 100px;
+        width: 100px;
+        max-width: none;
+        border-radius: 10px;
     }
     
     .item__name {
@@ -113,8 +118,8 @@
     width: 100%;
 
     .item__img {
-        max-height: 165px;
-        max-width: 165px;
+        height: 165px;
+        width: 165px;
     }
     
     .item__name {

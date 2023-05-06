@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
@@ -86,6 +87,11 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def price_with_discount(self) -> float:
+        return self.price * (100 - self.discount) / 100
+
+    price_with_discount.short_description = 'Цена со скидкой'
+
 
 class Category(models.Model):
     """Модель категории"""
@@ -100,10 +106,18 @@ class Category(models.Model):
         blank=True,
         verbose_name=_('Описание'),
     )
+    image = models.ImageField(
+        upload_to='categories/',
+        blank=True,
+        verbose_name='Картинка',
+    )
 
     class Meta:
         verbose_name = _('Категория')
         verbose_name_plural = _('Категории')
+
+    def get_absolute_url(self) -> str:
+        return reverse('backend:products_of_category', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return self.name

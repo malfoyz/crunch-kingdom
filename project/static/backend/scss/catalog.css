@@ -625,7 +625,7 @@ input {
   display: flex;
   justify-content: space-evenly; }
 
-.nav__item {
+.nav__item-link {
   display: flex;
   flex-direction: column;
   align-items: center; }

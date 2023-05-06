@@ -1,6 +1,5 @@
 {% extends 'backend/layout/base.html' %}
 
-{% load static %}
 {% load sass_tags %}
 
 {% block styles %}
@@ -11,48 +10,14 @@
 <section class="content container">
     <input type="search" class="content__search" placeholder="Поиск">
     <ul class="categories">
+    {% for category in categories %}
         <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Конфеты</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/sweets.png' %}" alt="sweets">
+            <a href="{{ category.get_absolute_url }}" class="category__link">
+                <p class="category__name">{{ category.name }}</p>
+                <img class="category__img" src="{{ category.image.url }}" alt="{{ category.name }}">
             </a>
         </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Мармелад</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/marmelad.png' %}" alt="sweets">
-            </a>
-        </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Пекарные изделия</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/bun.png' %}" alt="sweets">
-            </a>
-        </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Сладости на заказ</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/baker.png' %}" alt="sweets">
-            </a>
-        </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Кондитерские изделия</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/cake.png' %}" alt="sweets">
-            </a>
-        </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Напитки</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/drinks.png' %}" alt="sweets">
-            </a>
-        </li>
-        <li class="categories__item category">
-            <a class="category__link">
-                <p class="category__name">Импортные продукты</p>
-                <img class="category__img" src="{% static 'backend/img/catalog/import.png' %}" alt="sweets">
-            </a>
-        </li>
+    {% endfor %}
     </ul>
 </section>
 {% endblock content %}

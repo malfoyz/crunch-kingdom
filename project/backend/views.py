@@ -4,6 +4,8 @@ from django.http import (
     HttpResponse,
 )
 
+from .models import Category, Product
+
 
 def index(request: HttpRequest) -> HttpResponse:
     """Обработчик главной страницы"""
@@ -23,8 +25,10 @@ def index(request: HttpRequest) -> HttpResponse:
 def catalog(request: HttpRequest) -> HttpResponse:
     """Обработчик страницы каталога"""
 
+    categories = Category.objects.all()
     context = {
         'title': 'Каталог',
+        'categories': categories,
     }
 
     return render(
@@ -34,11 +38,13 @@ def catalog(request: HttpRequest) -> HttpResponse:
     )
 
 
-def products_of_category(request: HttpRequest, id: int) -> HttpResponse:
+def products_of_category(request: HttpRequest, pk: int) -> HttpResponse:
     """Обработчик страницы с постами"""
 
+    products = Product.objects.filter(category__pk=pk)
     context = {
-        'title': 'Продукты'
+        'title': 'Продукты',
+        'products': products,
     }
 
     return render(

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
@@ -109,6 +110,9 @@ class Category(models.Model):
     class Meta:
         verbose_name = _('Категория')
         verbose_name_plural = _('Категории')
+
+    def get_absolute_url(self) -> str:
+        return reverse('backend:products_of_category', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return self.name

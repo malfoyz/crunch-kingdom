@@ -136,5 +136,7 @@ dmypy.json
 project/media/
 
 # css
-project/static/scss/*.css
-project/static/scss/*.css.map
+*.css
+*.css.map
+
+*.idea/

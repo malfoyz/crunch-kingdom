@@ -1,3 +1,5 @@
+$btn-primary: #5CA72F;
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -23,4 +25,16 @@ input {
         font-weight: 300;
         font-size: 12px;
     }
+}
+
+.btn {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 13px 0;
+    color: white;
+    background: $btn-primary;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
 }

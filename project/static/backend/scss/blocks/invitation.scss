@@ -1,0 +1,32 @@
+$secondary-color: #8F8F8F;;
+
+.invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  gap: 20px;
+}
+
+.invitation__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.invitation__title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.invitation__description {
+  color: $secondary-color;
+  width: 90%;
+  text-align: center;
+}
+
+.invitation__btn {
+  width: 100%;
+}

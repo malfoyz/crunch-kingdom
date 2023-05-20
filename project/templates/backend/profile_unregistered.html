@@ -1,0 +1,19 @@
+{% extends 'backend/layout/base.html' %}
+
+{% load static %}
+{% load sass_tags %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/profile.scss' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content container profile invitation">
+    <img class="invitation__img" src="{% static 'backend/img/profile/candy.png' %}">
+    <div class="invitation__text">
+        <h3 class="invitation__title">Войдите в свой профиль</h3>
+        <p class="invitation__description">После авторизации Вам будут доступны все возможности нашего сервиса</p>
+    </div>
+    <a class="btn invitation__btn" type="submit" href="{% url 'backend:register' %}">Войти или зарегистрироваться</a>
+</section>
+{% endblock content %}

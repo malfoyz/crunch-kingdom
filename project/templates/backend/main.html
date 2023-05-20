@@ -9,28 +9,32 @@
 
 {% block content %}
 <section class="content container">
-    <input type="search" class="content__search" placeholder="Поиск">
+    <form method="get" action="{% url 'backend:products' %}">
+        <input type="search" name="search" class="content__search" placeholder="Поиск">
+    </form>
     <img class="content__banner" src="{% static 'backend/img/main-banner.png' %}" alt="#">
     <section class="content__section section">
         <h2 class="section__title">Новинки недели</h2>
         <div class="section__products products">
         {% for product in new_products %}
             <article class="products__item item">
-                <img class="item__img" src="{{ product.photobase.image1.url }}">
-                <p class="item__name">{{ product.name }}</p>
-                <p class="item__shop-name">"{{ product.shop.name }}"</p>
-                <div class="item__purchase">
-                    <div class="item__numerical">
-                        <p class="item__price">{{ product.price|floatformat }} ₽</p>
-                        <p class="item__weight">/{{ product.weight }}г</p>
+                <a class="item__link" href="{% url 'backend:product' product.pk %}">
+                    <img class="item__img" src="{{ product.photobase.image1.url }}">
+                    <p class="item__name">{{ product.name }}</p>
+                    <p class="item__shop-name">"{{ product.shop.name }}"</p>
+                    <div class="item__purchase">
+                        <div class="item__numerical">
+                            <p class="item__price">{{ product.price_with_discount|floatformat }} ₽</p>
+                            <p class="item__weight">/{{ product.weight }}г</p>
+                        </div>
+                        <a class="item__btn-to-cart" href="{% url 'backend:add_to_cart' product.pk %}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="12" fill="#DBA921"/>
+                                <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                            </svg>
+                        </a>
                     </div>
-                    <a class="item__btn-to-cart" href="#">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="12" fill="#DBA921"/>
-                            <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
+                </a>
             </article>
         {% endfor %}
         </div>
@@ -40,21 +44,23 @@
         <div class="section__products products">
         {% for product in discount_products %}
             <article class="products__item item">
-                <img class="item__img" src="{{ product.photobase.image1.url }}">
-                <p class="item__name">{{ product.name }}</p>
-                <p class="item__shop-name">"{{ product.shop.name }}"</p>
-                <div class="item__purchase">
-                    <div class="item__numerical">
-                        <p class="item__price item__price--orange">{{ product.price_with_discount|floatformat }} ₽</p>
-                        <p class="item__old-price"><strike>{{ product.price|floatformat }}</strike></p>
+                <a class="item__link" href="{% url 'backend:product' product.pk %}">
+                    <img class="item__img" src="{{ product.photobase.image1.url }}">
+                    <p class="item__name">{{ product.name }}</p>
+                    <p class="item__shop-name">"{{ product.shop.name }}"</p>
+                    <div class="item__purchase">
+                        <div class="item__numerical">
+                            <p class="item__price item__price--orange">{{ product.price|floatformat }} ₽</p>
+                            <p class="item__old-price"><strike>{{ product.price_with_discount|floatformat }}</strike></p>
+                        </div>
+                        <a class="item__btn-to-cart" href="{% url 'backend:add_to_cart' product.pk %}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="12" fill="#DBA921"/>
+                                <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                            </svg>
+                        </a>
                     </div>
-                    <a class="item__btn-to-cart" href="#">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="12" fill="#DBA921"/>
-                            <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
+                </a>
             </article>
         {% endfor %}
         </div>
@@ -64,21 +70,23 @@
         <div class="section__products products">
         {% for product in new_products %}
             <article class="products__item item">
-                <img class="item__img" src="{{ product.photobase.image1.url }}">
-                <p class="item__name">{{ product.name }}</p>
-                <p class="item__shop-name">"{{ product.shop.name }}"</p>
-                <div class="item__purchase">
-                    <div class="item__numerical">
-                        <p class="item__price">{{ product.price }} ₽</p>
-                        <p class="item__weight">/{{ product.weight }}г</p>
+                <a class="item__link" href="{% url 'backend:product' product.pk %}">
+                    <img class="item__img" src="{{ product.photobase.image1.url }}">
+                    <p class="item__name">{{ product.name }}</p>
+                    <p class="item__shop-name">"{{ product.shop.name }}"</p>
+                    <div class="item__purchase">
+                        <div class="item__numerical">
+                            <p class="item__price">{{ product.price_with_discount|floatformat }} ₽</p>
+                            <p class="item__weight">/{{ product.weight }}г</p>
+                        </div>
+                        <a class="item__btn-to-cart" href="{% url 'backend:add_to_cart' product.pk %}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="12" fill="#DBA921"/>
+                                <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                            </svg>
+                        </a>
                     </div>
-                    <a class="item__btn-to-cart" href="#">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="12" fill="#DBA921"/>
-                            <path d="M11.1491 7.26212C11.2938 6.90365 11.1206 6.4957 10.7621 6.35093C10.4037 6.20616 9.9957 6.3794 9.85093 6.73788L8.52777 10.0143H6H5.1133L5.31912 10.8768L6.45263 15.6267C6.74272 16.8423 7.82914 17.7 9.07889 17.7H14.9211C16.1709 17.7 17.2573 16.8423 17.5474 15.6267L18.6809 10.8768L18.8867 10.0143H18H15.4722L14.1491 6.73788C14.0043 6.3794 13.5963 6.20616 13.2379 6.35093C12.8794 6.4957 12.7062 6.90365 12.8509 7.26212L13.9624 10.0143H10.0376L11.1491 7.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
+                </a>
             </article>
         {% endfor %}
         </div>

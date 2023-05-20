@@ -1,0 +1,41 @@
+{% load sass_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/auth.scss' %}">
+    {% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
+    <title>{{ title }}</title>
+</head>
+<body style='background-image: url("{% static 'backend/img/background.png' %}");'>
+    <section class="container auth">
+        <img class="auth__logo" src="{% static 'backend/img/logo.png' %}">
+        {% block content %}{% endblock %}
+        <section class="auth__socials socials">
+            <p class="socials__label">Войдите через</p>
+            <ul class="socials__list">
+                <li class="socials__item social">
+                    <a class="social__link" href="#">
+                        <img class="social__img" src="{% static 'backend/img/socials/telegram.png' %}">
+                    </a>
+                </li>
+                <li class="socials__item social">
+                    <a class="social__link" href="#">
+                        <img class="social__img" src="{% static 'backend/img/socials/vk.png' %}">
+                    </a>
+                </li>
+                <li class="socials__item social">
+                    <a class="social__link" href="#">
+                        <img class="social__img" src="{% static 'backend/img/socials/google.png' %}">
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </section>
+</body>
+</html>

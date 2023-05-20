@@ -8,7 +8,9 @@
 
 {% block content %}
 <section class="content container">
-    <input type="search" class="content__search" placeholder="Поиск">
+    <form method="get">
+        <input type="search" name="search" class="content__search" placeholder="Поиск">
+    </form>
     <ul class="categories">
     {% for category in categories %}
         <li class="categories__item category">

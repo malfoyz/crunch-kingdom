@@ -27,6 +27,7 @@ class Product(models.Model):
     discount = models.PositiveSmallIntegerField(
         blank=True,
         verbose_name=_('Скидка'),
+        default=0,
         validators=(
             MaxValueValidator(100),
         ),

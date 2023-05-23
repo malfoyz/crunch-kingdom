@@ -51,23 +51,14 @@ $btn-primary: #5CA72F;
     color: $secondary-color;
 }
 
+.ordering__btn {
+    margin-top: 20px;
+}
+
 .total__price {
     font-size: 20px;
     font-weight: 600;
     color: $primary-color;
-}
-
-.ordering__btn {
-    display: block;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 13px 0;
-    margin-top: 20px;
-    color: white;
-    background: $btn-primary;
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.12);
-    border-radius: 10px;
 }
 
 

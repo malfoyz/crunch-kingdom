@@ -1,0 +1,42 @@
+{% extends 'backend/layout/base.html' %}
+
+{% load sass_tags %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/product.scss' %}">
+{% endblock %}
+
+
+{% block content %}
+<section class="content container product">
+    <a class="product__link-back" href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}
+                 {% else %}{% url 'backend:home' %}{% endif %}">
+        <svg width="38" height="9" viewBox="0 0 38 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L19 7L37 1" stroke="#B6B6B6" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </a>
+    <img class="product__img" src="{{ product.photobase.image1.url }}" alt="product">
+    <div>
+        <h3 class="product__title">{{ product.name }}</h3>
+        <p class="product__weight">{{ product.weight }}г</p>
+    </div>
+    <div>
+        <p class="product__label">Описание</p>
+        <p class="product__description">{{ product.description }}</p>
+    </div>
+    <div>
+        <p class="product__label">Состав</p>
+        <ul class="product__composition composition">
+        {% for item in composition_list %}
+            <li class="composition__item">{{ item }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <a class="product__btn-to-cart btn" href="{% url 'backend:add_to_cart' product.pk %}" type="submit">
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.39907 1.26212C9.54384 0.903653 9.37059 0.495698 9.01212 0.350931C8.65365 0.206164 8.2457 0.379405 8.10093 0.737876L6.02777 5.87143H2H1.1133L1.31912 6.73391L3.20263 14.6267C3.49272 15.8423 4.57914 16.7 5.82889 16.7H16.1711C17.4209 16.7 18.5073 15.8423 18.7974 14.6267L20.6809 6.73391L20.8867 5.87143H20H15.9722L13.8991 0.737876C13.7543 0.379405 13.3463 0.206164 12.9879 0.350931C12.6294 0.495698 12.4562 0.903653 12.6009 1.26212L14.4624 5.87143H7.53762L9.39907 1.26212Z" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <p class="">Добавить в корзину</p>
+    </a>
+</section>
+{% endblock content %}

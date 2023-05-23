@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load sass_tags %}
+{% load socialaccount %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/profile.scss' %}">
@@ -9,8 +10,9 @@
 
 {% block content %}
 <section class="content container profile">
+{% for account in user.socialaccount_set.all %}
     <div class="profile__avatar avatar">
-        <img class="avatar__img" src="{% static 'backend/img/profile/avatar.png' %}">
+        <img class="avatar__img" src="{{ account.get_avatar_url }}">
         <a class="avatar__btn">
             
         </a>
@@ -18,17 +20,18 @@
     <form class="profile__form" method="post" enctype="multipart/form-data">
         <!-- <input id="file-upload" type="file" name="file-upload"/> -->
         <label class="profile__label">Имя Фамилия</label>
-        <input class="profile__input" placeholder="Имя Фамилия">
+        <input class="profile__input" value="{{ account.extra_data.first_name }} {{ account.extra_data.last_name }}" placeholder="Имя Фамилия">
         <label class="profile__label">E-mail</label>
-        <input class="profile__input" placeholder="E-mail">
+        <input class="profile__input" value="{{ account.extra_data.email }}" placeholder="E-mail">
         <label class="profile__label">Телефон</label>
-        <input class="profile__input" placeholder="Телефон">
+        <input class="profile__input" value="{{ account.extra_data.phone_number }}" placeholder="Телефон">
          <!-- <input type="submit" value="Отправить"> -->
     </form>
     <section class="profile__btns">
         <a href="#" class="profile__btn">Изменить пароль</a>
         <a href="#" class="profile__btn">История заказов</a>
-        <a href="#" class="profile__btn profile__btn--warning">Выйти</a>
+        <a href="{% url 'backend:logout' %}" class="profile__btn profile__btn--warning">Выйти</a>
     </section>
+{% endfor %}
 </section>
 {% endblock content %}

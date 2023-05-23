@@ -1,0 +1,10 @@
+{% extends 'backend/layout/auth.html' %}
+
+
+{% block content %}
+<form class="auth__form" method="post">
+    <h1 class="auth__heading">{{ title }}</h1>
+    <input class="auth__input" type="text" placeholder="Код подтверждения">
+    <button type="submit" class="btn auth__btn">Подтвердить</button>
+</form>
+{% endblock content %}

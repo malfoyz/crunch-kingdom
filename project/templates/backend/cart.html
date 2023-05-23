@@ -3,6 +3,8 @@
 {% load static %}
 {% load sass_tags %}
 
+{% load tags %}
+
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/cart.scss' %}">
 {% endblock %}
@@ -10,116 +12,54 @@
 {% block content %}
 <section class="content container cart">
     <div class="cart__info">
-        <p class="cart__quantity">В корзине 3 товара</p>
-        <a class="cart__clear" href="#">Очистить</a>
+        <p class="cart__quantity">В корзине {{ products.count }} товара</p>
+        <a class="cart__clear" href="{% url 'backend:clear_cart' %}">Очистить</a>
     </div>
     <section class="cart__products products">
+    {% for product in products %}
         <article class="products__item products__item--horizontal product">
-            <img class="item__img" src="{% static 'backend/img/products/box-tort.png' %}">
+            <img class="item__img" src="{{ product.photobase.image1.url }}">
             <div class="item__info">
                 <div class="item__top">
-                    <p class="item__name">Торт Кубик Рубика</p>
-                    <a class="item__delete">
+                    <p class="item__name">{{ product.name }}</p>
+                    <a class="item__delete" href="{% url 'backend:remove_from_cart' product.pk %}">
                         <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.72792 9.72792L1.24264 1.24264M1.24264 9.72792L9.72792 1.24264" stroke="#8F8F8F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
-                <p class="item__shop-name">"Седрик Гроле"</p>
-                <p class="item__weight">400г</p>
+                <p class="item__shop-name">"{{ product.shop.name }}"</p>
+                <p class="item__weight">{{ product.weight }}г</p>
                 <div class="item__purchase">
                     <div class="item__quantity-change quantity-change">
-                        <a class="quantity-change__btn">
+                        <a class="quantity-change__btn" href="{% url 'backend:reduce_product_in_cart' product.pk %}">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
                                 <path d="M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <p class="item__quantity">1 шт</p>
-                        <a class="quantity-change__btn">
+                        <p class="item__quantity">{{ cart|get_item:product.pk }} шт</p>
+                        <a class="quantity-change__btn" href="{% url 'backend:add_to_cart' product.pk %}">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="0.5" y="0.500031" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
                                 <path d="M12 18V6.00003M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
                     </div>
-                    <p class="item__price item__price--orange">789 руб.</p>
+                    <p class="item__price item__price--orange">{{ product.total_price }} руб.</p>
                 </div>
             </div>
         </article>
-        <article class="products__item products__item--horizontal product">
-            <img class="item__img" src="{% static 'backend/img/products/donuts.png' %}">
-            <div class="item__info">
-                <div class="item__top">
-                    <p class="item__name">Пончики ЧИКИ</p>
-                    <a class="item__delete">
-                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.72792 9.72792L1.24264 1.24264M1.24264 9.72792L9.72792 1.24264" stroke="#8F8F8F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-                <p class="item__shop-name">"Пекарня у Джо"</p>
-                <p class="item__weight">400г</p>
-                <div class="item__purchase">
-                    <div class="item__quantity-change quantity-change">
-                        <a class="quantity-change__btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
-                                <path d="M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <p class="item__quantity">2 шт</p>
-                        <a class="quantity-change__btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.500031" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
-                                <path d="M12 18V6.00003M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="item__price item__price--orange">240 руб.</p>
-                </div>
-            </div>
-        </article>
-        <article class="products__item products__item--horizontal product">
-            <img class="item__img" src="{% static 'backend/img/products/macaroni.png' %}">
-            <div class="item__info">
-                <div class="item__top">
-                    <p class="item__name">Макарони Туиль</p>
-                    <a class="item__delete">
-                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.72792 9.72792L1.24264 1.24264M1.24264 9.72792L9.72792 1.24264" stroke="#8F8F8F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-                <p class="item__shop-name">"ТакСяк Coffee"</p>
-                <p class="item__weight">400г</p>
-                <div class="item__purchase">
-                    <div class="item__quantity-change quantity-change">
-                        <a class="quantity-change__btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
-                                <path d="M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <p class="item__quantity">1 шт</p>
-                        <a class="quantity-change__btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.500031" width="23" height="23" rx="5.5" stroke="#8F8F8F"/>
-                                <path d="M12 18V6.00003M6 12H18" stroke="#DBA921" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="item__price item__price--orange">120 руб.</p>
-                </div>
-            </div>
-        </article>
+    {% endfor %}
     </section>
+    {% if cart %}
     <section class="cart__ordering ordering">
         <div class="ordering__total total">
             <p class="total__label">Итого</p>
-            <p class="total__price">1149 руб.</p>
+            <p class="total__price">{{ total_price }} руб.</p>
         </div>
-        <a class="ordering__btn" href="#">Оформить заказ</a>
+        <a class="ordering__btn btn" href="#">Оформить заказ</a>
     </section>
+    {% endif %}
 </section>
 {% endblock content %}

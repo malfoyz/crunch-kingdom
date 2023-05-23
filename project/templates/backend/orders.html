@@ -1,0 +1,44 @@
+{% extends 'backend/layout/base.html' %}
+
+
+{% load sass_tags %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% sass_src 'backend/scss/orders.scss' %}">
+{% endblock %}
+
+
+{% block content %}
+<section class="container content orders">
+    <a class="orders__link-back" href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}
+                 {% else %}{% url 'backend:home' %}{% endif %}">
+        <svg width="38" height="9" viewBox="0 0 38 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L19 7L37 1" stroke="#B6B6B6" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </a>
+    <article class="orders__item order">
+        <div class="order__products">
+            <footer>
+                <p class="order__date">Заказ от <time datetime="2023-05-18">12.04.22</time></p>
+            </footer>
+            <div class="order__images">
+            {% for product in products %}
+                <img class="order__img" src="{{ product.photobase.image1.url }}">
+            {% endfor %}
+            </div>
+            <p class="order__names">Rafaello, Макарони Туиль</p>
+        </div>
+        <div class="order__info">
+            <div class="order__status">
+                <p class="order__label">Статус</p>
+                <p class="order__status-info order__status-info--done">Выполнено</p>
+            </div>
+            <div class="order__total">
+                <p class="order__label">Итого</p>
+                <p class="order__total-info">1149 руб.</p>
+            </div>
+        </div>
+    </article>
+</section>
+{% endblock content %}

@@ -13,6 +13,8 @@ class CustomUser(AbstractUser):
     )
     phone = models.CharField(
         max_length=11,
+        null=True,
+        blank=True,
         unique=True,
         verbose_name=_('Телефон'),
     )

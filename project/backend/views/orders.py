@@ -1,16 +1,16 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from ..models import Product
+from ..models import Order, Product
 
 
 def orders(request: HttpRequest) -> HttpResponse:
     """Обработчик страницы истории заказов"""
 
-    products = Product.objects.filter(pk__in=[1, 2])
+    orders = Order.objects.filter(user=request.user)
     context = {
         'title': 'История заказов',
-        'products': products,
+        'orders': orders,
     }
 
     return render(

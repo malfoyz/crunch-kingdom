@@ -58,7 +58,7 @@
             <p class="total__label">Итого</p>
             <p class="total__price">{{ total_price }} руб.</p>
         </div>
-        <a class="ordering__btn btn" href="#">Оформить заказ</a>
+        <a class="ordering__btn btn" href="{% url 'backend:payment' %}">Оформить заказ</a>
     </section>
     {% endif %}
 </section>

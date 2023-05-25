@@ -29,7 +29,7 @@
     </form>
     <section class="profile__btns">
         <a href="#" class="profile__btn">Изменить пароль</a>
-        <a href="#" class="profile__btn">История заказов</a>
+        <a href="{% url 'backend:orders' %}" class="profile__btn">История заказов</a>
         <a href="{% url 'backend:logout' %}" class="profile__btn profile__btn--warning">Выйти</a>
     </section>
 {% endfor %}

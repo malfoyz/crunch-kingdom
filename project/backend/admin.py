@@ -33,7 +33,8 @@ class ShopReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Shop)
-admin.site.register(Deal)
+admin.site.register(Order)
+admin.site.register(OrderDetail)
 admin.site.register(ProductPhotobase)
 admin.site.register(ReviewPhotobase)
 

@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views.auth import logout_view, register
 from .views.cart import (
-    add_to_cart, cart, clear_cart,
+    add_to_cart, cart, clear_cart, payment,
     reduce_product_in_cart, remove_from_cart,
 )
 from .views.catalog import catalog
@@ -20,6 +20,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('orders/', orders, name='orders'),
     path('profile/', profile, name='profile'),
+    path('payment/', payment, name='payment'),
     path('cart/clear/', clear_cart, name='clear_cart'),
     path('cart/remove/<int:product_id>/',
          remove_from_cart, name='remove_from_cart'),

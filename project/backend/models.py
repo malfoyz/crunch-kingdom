@@ -160,8 +160,38 @@ class Shop(models.Model):
         return self.name
 
 
-class Deal(models.Model):
-    """Модель сделки"""
+class Order(models.Model):
+    """Модель заказа"""
+
+    datetime = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_('Дата и время'),
+    )
+    user = models.ForeignKey(
+        to=CustomUser,
+        on_delete=models.DO_NOTHING,
+        related_name='deals',
+        related_query_name='deal',
+        verbose_name=_('Покупатель'),
+    )
+
+    class Meta:
+        verbose_name = _('Заказ')
+        verbose_name_plural = _('Заказы')
+        ordering = ('-datetime',)
+
+    def __str__(self) -> str:
+        return str(self.pk)
+
+    def total_price(self):
+        total_price = 0
+        for detail in self.details.all():
+            total_price += detail.price
+        return total_price
+
+
+class OrderDetail(models.Model):
+    """Модель детали о заказе"""
 
     quantity = models.PositiveIntegerField(
         verbose_name=_('Количество'),
@@ -174,28 +204,24 @@ class Deal(models.Model):
             MinValueValidator(Decimal('0.00')),
         ),
     )
-    datetime = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_('Дата и время'),
-    )
-    user = models.ForeignKey(
-        to=CustomUser,
-        on_delete=models.DO_NOTHING,
-        related_name='deals',
-        related_query_name='deal',
-        verbose_name=_('Покупатель'),
-    )
     product = models.ForeignKey(
         to='Product',
         on_delete=models.DO_NOTHING,
-        related_name='deals',
-        related_query_name='deal',
+        related_name='products',
+        related_query_name='product',
         verbose_name=_('Продукт'),
+    )
+    order = models.ForeignKey(
+        to='Order',
+        on_delete=models.CASCADE,
+        related_name='details',
+        related_query_name='detail',
+        verbose_name=_('Заказ'),
     )
 
     class Meta:
-        verbose_name = _('Сделка')
-        verbose_name_plural = _('Сделки')
+        verbose_name = _('Деталь сделка')
+        verbose_name_plural = _('Детали сделки')
 
     def __str__(self) -> str:
         return str(self.pk)
@@ -253,12 +279,12 @@ class ShopReview(Review):
 class ProductReview(Review):
     """Модель отзыва о продукте"""
 
-    deal = models.OneToOneField(
-        to='Deal',
+    order_detail = models.OneToOneField(
+        to='OrderDetail',
         on_delete=models.CASCADE,
         related_name='review',
         related_query_name='review',
-        verbose_name=_('Сделка'),
+        verbose_name=_('Деталь сделки'),
     )
     photobase = models.OneToOneField(
         to='ReviewPhotobase',
